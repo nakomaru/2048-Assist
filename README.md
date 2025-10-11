@@ -1,5 +1,7 @@
 # 2048 Assist
 
+[Live Demo](https://nakomaru.github.io/2048-Assist/)
+
 A 2048 game guide. It solves what it thinks is the best move for you to play. The board must set manually.
 
 This is a fork of the [2048-AI](https://github.com/ovolve/2048-AI) project, which was originally an AI for the game [2048](https://github.com/gabrielecirulli/2048). This version has been modified to function as a manual gameplay assistant.
