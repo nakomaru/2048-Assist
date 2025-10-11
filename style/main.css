@@ -139,6 +139,8 @@ hr {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   background: #bbada0;
   border-radius: 6px;
   width: 500px;
@@ -482,6 +484,8 @@ hr {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
     background: #bbada0;
     border-radius: 6px;
     width: 280px;
@@ -697,3 +701,21 @@ hr {
     opacity: 1;
     top: -45px;
     pointer-events: auto; }
+
+.clickable-grid {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  width: 470px;
+  height: 470px;
+  z-index: 3;
+}
+
+.clickable-grid-cell {
+  width: 106.25px;
+  height: 106.25px;
+  margin-right: 15px;
+  margin-bottom: 15px;
+  float: left;
+  cursor: pointer;
+}

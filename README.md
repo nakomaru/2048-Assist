@@ -1,11 +1,15 @@
-# 2048 AI
+# 2048 Assist
 
-AI for the game [2048](https://github.com/gabrielecirulli/2048).
+A 2048 game guide. It solves what it thinks is the best move for you to play. The board is also configurable, allowing you to set up specific scenarios.
 
-See it in action [here](http://ovolve.github.io/2048-AI/). (Hit the auto-run button to let the AI attempt to solve it by itself)
+This is a fork of the [2048-AI](https://github.com/ovolve/2048-AI) project, which was originally an AI for the game [2048](https://github.com/gabrielecirulli/2048). This version has been modified to function as a manual gameplay assistant.
 
-The algorithm is iterative deepening depth first alpha-beta search. The evaluation function tries to keep the rows and columns monotonic (either all decreasing or increasing) while aligning same-valued tiles and minimizing the number of tiles on the grid. For more detail on how it works, [check out my answer on stackoverflow](http://stackoverflow.com/a/22389702/1056032).
+## Features
 
-You can tweak the thinking time via global var `animationDelay`. Higher = more time/deeper search.
+*   **Best Move Hints:** The AI calculates and displays the next best move.
+*   **Automatic Deterministic Moves:** If a move results in only one empty cell, the game will automatically place a '2' in that cell and instantly provide the next hint.
+*   **Configurable Board:** You can manually edit the tiles on the board to create custom scenarios.
+    *   **Left-click** on a cell to double its value.
+    *   **Right-click** on a cell to halve its value (or remove it if the value is 2).
 
-It achieves success rate of about 90% in my testing.
+The underlying algorithm is an iterative deepening depth-first alpha-beta search. The evaluation function tries to keep the rows and columns monotonic, align same-valued tiles, and minimize the number of tiles on the grid.

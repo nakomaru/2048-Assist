@@ -164,6 +164,8 @@ hr {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 
     background: $game-container-background;
     border-radius: $tile-border-radius * 2;
@@ -289,6 +291,8 @@ hr {
 
 .tile {
   border-radius: $tile-border-radius;
+
+  -webkit-touch-callout: none;
 
   background: $tile-color;
   text-align: center;

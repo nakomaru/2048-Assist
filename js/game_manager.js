@@ -1,45 +1,31 @@
-function GameManager(size, InputManager, Actuator) {
+function GameManager(size, InputManager) {
   this.size         = size; // Size of the grid
   this.inputManager = new InputManager;
-  this.actuator     = new Actuator;
 
-  this.running      = false;
+  this.manualMode   = true;
+  this.hintTimeout  = null;
 
   this.inputManager.on("move", this.move.bind(this));
   this.inputManager.on("restart", this.restart.bind(this));
-
-  this.inputManager.on('think', function() {
-    var best = this.ai.getBest();
-    this.actuator.showHint(best.move);
-  }.bind(this));
-
-
-  this.inputManager.on('run', function() {
-    if (this.running) {
-      this.running = false;
-      this.actuator.setRunButton('Auto-run');
-    } else {
-      this.running = true;
-      this.run()
-      this.actuator.setRunButton('Stop');
-    }
-  }.bind(this));
-
-  this.setup();
 }
+
+GameManager.prototype.setActuator = function (actuator) {
+  this.actuator = actuator;
+};
+
+GameManager.prototype.start = function () {
+  this.setup();
+};
 
 // Restart the game
 GameManager.prototype.restart = function () {
   this.actuator.restart();
-  this.running = false;
-  this.actuator.setRunButton('Auto-run');
   this.setup();
 };
 
 // Set up the game
 GameManager.prototype.setup = function () {
   this.grid         = new Grid(this.size);
-  this.grid.addStartTiles();
 
   this.ai           = new AI(this.grid);
 
@@ -49,11 +35,13 @@ GameManager.prototype.setup = function () {
 
   // Update the actuator
   this.actuate();
+  this.runHintCalculation();
 };
 
 
 // Sends the updated grid to the actuator
 GameManager.prototype.actuate = function () {
+  this.actuator.showHint(-1);
   this.actuator.actuate(this.grid, {
     score: this.score,
     over:  this.over,
@@ -61,14 +49,43 @@ GameManager.prototype.actuate = function () {
   });
 };
 
+GameManager.prototype.runHintCalculation = function () {
+  if (this.hintTimeout) {
+    clearTimeout(this.hintTimeout);
+  }
+
+  var self = this;
+  this.hintTimeout = setTimeout(function() {
+    var best = self.ai.getBest();
+    if (best) {
+      self.actuator.showHint(best.move);
+    } else {
+      self.actuator.showHint(-1);
+    }
+  }, 100);
+}
+
 // makes a given move and updates state
 GameManager.prototype.move = function(direction) {
+  this.moveAndAutoplay(direction);
+}
+
+GameManager.prototype.moveAndAutoplay = function(direction) {
   var result = this.grid.move(direction);
   this.score += result.score;
 
   if (!result.won) {
     if (result.moved) {
-      this.grid.computerMove();
+      var availableCells = this.grid.availableCells();
+      if (availableCells.length == 1) {
+        this.grid.addSpecificTile(availableCells[0], 2);
+        this.grid.playerTurn = true;
+        this.runHintCalculation();
+      } else if (!this.manualMode) {
+        this.grid.computerMove();
+      } else {
+        this.grid.playerTurn = true;
+      }
     }
   } else {
     this.won = true;
@@ -81,17 +98,4 @@ GameManager.prototype.move = function(direction) {
   }
 
   this.actuate();
-}
-
-// moves continuously until game is over
-GameManager.prototype.run = function() {
-  var best = this.ai.getBest();
-  this.move(best.move);
-  var timeout = animationDelay;
-  if (this.running && !this.over && !this.won) {
-    var self = this;
-    setTimeout(function(){
-      self.run();
-    }, timeout);
-  }
 }

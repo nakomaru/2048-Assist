@@ -1,0 +1,141 @@
+@import url(fonts/clear-sans.css);
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #faf8ef;
+  color: #776e65;
+  font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
+  font-size: 18px; 
+}
+
+#main-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+#hint-container {
+  margin-right: 20px;
+  text-align: center;
+}
+
+#hint-arrow {
+  font-size: 2em;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#game-container {
+  display: grid;
+  grid-template-columns: repeat(4, 100px);
+  grid-template-rows: repeat(4, 100px);
+  grid-gap: 10px;
+  border: 10px solid #bbada0;
+  border-radius: 6px;
+  width: 430px;
+  height: 430px;
+  background-color: #bbada0;
+}
+
+.grid-cell {
+  background-color: rgba(238, 228, 218, 0.35);
+  border-radius: 3px;
+}
+
+.tile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  border-radius: 3px;
+  width: 100px;
+  height: 100px;
+}
+
+.tile.tile-2 {
+  background: #eee4da;
+  color: #776e65;
+  font-size: 45px;
+}
+
+.tile.tile-4 {
+  background: #ede0c8;
+  color: #776e65;
+  font-size: 45px;
+}
+
+.tile.tile-8 {
+  color: #f9f6f2;
+  background: #f2b179;
+  font-size: 45px;
+}
+
+.tile.tile-16 {
+  color: #f9f6f2;
+  background: #f59563;
+  font-size: 45px;
+}
+
+.tile.tile-32 {
+  color: #f9f6f2;
+  background: #f67c5f;
+  font-size: 45px;
+}
+
+.tile.tile-64 {
+  color: #f9f6f2;
+  background: #f65e3b;
+  font-size: 45px;
+}
+
+.tile.tile-128 {
+  color: #f9f6f2;
+  background: #edcf72;
+  font-size: 35px;
+}
+
+.tile.tile-256 {
+  color: #f9f6f2;
+  background: #edcc61;
+  font-size: 35px;
+}
+
+.tile.tile-512 {
+  color: #f9f6f2;
+  background: #edc850;
+  font-size: 35px;
+}
+
+.tile.tile-1024 {
+  color: #f9f6f2;
+  background: #edc53f;
+  font-size: 25px;
+}
+
+.tile.tile-2048 {
+  color: #f9f6f2;
+  background: #edc22e;
+  font-size: 25px;
+}
+
+.tile.tile-4096 {
+  color: #f9f6f2;
+  background: #3c3a32;
+  font-size: 25px;
+}
+
+.tile.tile-8192 {
+  color: #f9f6f2;
+  background: #3c3a32;
+  font-size: 25px;
+}
+
+.tile.tile-16384 {
+  color: #f9f6f2;
+  background: #3c3a32;
+  font-size: 25px;
+}
